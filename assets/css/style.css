@@ -1,8 +1,31 @@
-.crystal-image {
-  width: 300px;
-  height: 300px;
+img {
+  width: 200px;
+  height: 200px;
 }
 h1 {
   font-size: 48px;
   font-weight: 400;
+  color: red;
+}
+p {
+  font-size: 18px;
+  font-weight: 400;
+  color: black;
+}
+body {
+  background-color: yellowgreen;
+}
+#total-score {
+  font-size: 60px;
+}
+#target-score {
+  font-size: 60px;
+}
+#win-count {
+  font-size: 48px;
+  text-align: center;
+}
+#loss-count {
+  font-size: 48px;
+  text-align: center;
 }

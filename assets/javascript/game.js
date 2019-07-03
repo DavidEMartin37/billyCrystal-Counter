@@ -1,29 +1,90 @@
-
-var targetNumber = 120;
-$("#number-to-guess").text(targetNumber);
-
-var counter = 0;
-var numberOptions = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-for (var i = 0; i < numberOptions.length; i++); {
-  var imageCrystal = $("<img>");
-  imageCrystal.addClass("crystal-image");
-  imageCrystal.attr("src", "assets/images/forget-paris.jpg");
-  imageCrystal.attr("data-crystalvalue", numberOptions[i]);
-  $("#crystals").append(imageCrystal);
-}
-//var increment = numberOptions[Math.round(Math.random())];
-$(".crystal-image").on("click", function() {
-  var crystalValue = ($(this).attr("data-crystalvalue"));
-  crystalValue = parseInt(crystalValue);
-  counter += crystalValue;
-  
-  alert("New score: " + counter);
-  if (counter === targetNumber) {
-    alert("You Win!");
-  }else if (counter >= targetNumber) {
-    alert("You Lose!");
+var crystal = {
+  forgetParis:
+  {
+    name: "Forget Paris",
+    value: 0
+  },
+  citySlicker:
+  {
+    name: "City Slicker",
+    value: 0
+  },
+  analyseThat:
+  {
+    name: "Analyse That",
+    value: 0
+  },
+  princessBride:
+  {
+    name: "Princess Bride",
+    value: 0
   }
+};
+var targetScore = 0;
+var totalScore = 0;
+var winCount = 0;
+var lossCount = 0;
+
+function startGame() {
+  $("#total-score").empty();
+  totalScore = 0;
+  targetScore = Math.floor(Math.random() * 102) + 19;
+  console.log(targetScore);
+  crystal.forgetParis.value = Math.floor(Math.random() * 11) + 1;
+  crystal.citySlicker.value = Math.floor(Math.random() * 11) + 1;
+  crystal.analyseThat.value = Math.floor(Math.random() * 11) + 1;
+  crystal.princessBride.value = Math.floor(Math.random() * 11) + 1;
+  console.log(crystal.forgetParis.value);
+  console.log(crystal.citySlicker.value);
+  console.log(crystal.analyseThat.value);
+  console.log(crystal.princessBride.value);
+  $("#total-score").text(totalScore);
+  $("#target-score").text(targetScore);
+  eventListener();
   
+};
+
+function result() {
+  if (totalScore < targetScore) {
+    return;
+  }else if (totalScore > targetScore) {
+    alert("You Lose");
+    lossCount++;
+    $("#loss-count").text("Losses: " + lossCount);
+    startGame();
+  }else if (totalScore === targetScore) {
+    alert("You Win");
+    winCount++;
+    $("#win-count").text("Wins: " + winCount);
+    startGame();
+  }
+};
+
+function eventListener(click) {
+$("#forget-paris").on("click", function() {
+  totalScore += crystal.forgetParis.value;
+  $("#total-score").text(totalScore);
+  console.log(totalScore);
+  result();
+});
+$("#city-slicker").on("click", function() {
+  totalScore += crystal.citySlicker.value;
+  $("#total-score").text(totalScore);
+  console.log(totalScore);
+  result();
+});
+$("#analyse-that").on("click", function() {
+  totalScore += crystal.analyseThat.value;
+  $("#total-score").text(totalScore);
+  console.log(totalScore);
+  result();
+});
+$("#princess-bride").on("click", function() {
+  totalScore += crystal.princessBride.value;
+  $("#total-score").text(totalScore);
+  console.log(totalScore);
+  result();
 });
 
-//var crystalValue = Math.floor(Math.random() * 12) + 1;
+};
+startGame();
