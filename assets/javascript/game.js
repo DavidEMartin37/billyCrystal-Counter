@@ -26,7 +26,7 @@ var winCount = 0;
 var lossCount = 0;
 
 function startGame() {
-  $("#total-score").empty();
+  
   totalScore = 0;
   targetScore = Math.floor(Math.random() * 102) + 19;
   console.log(targetScore);
@@ -51,11 +51,15 @@ function result() {
     alert("You Lose");
     lossCount++;
     $("#loss-count").text("Losses: " + lossCount);
+    $("#total-score").empty();
+    $(crystal).empty();
     startGame();
   }else if (totalScore === targetScore) {
     alert("You Win");
     winCount++;
     $("#win-count").text("Wins: " + winCount);
+    $("#total-score").empty();
+    $(crystal).empty();
     startGame();
   }
 };
